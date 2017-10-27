@@ -1,8 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>ex_RESTful_Web_Service</groupId>
-	<artifactId>ex_RESTful_Web_Service</artifactId>
+	<groupId>assignment1-rest</groupId>
+	<artifactId>assignment1-rest</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
@@ -11,6 +11,11 @@
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.5.7.RELEASE</version>
 	</parent>
+	
+	<properties>
+	<java.version>1.8</java.version>
+<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+</properties>
 
 	<dependencies>
 		<dependency>
@@ -34,12 +39,8 @@
 		</dependency>
 	</dependencies>
 
-	<properties>
-		<java.version>1.8</java.version>
-	</properties>
-
 	<build>
-		<sourceDirectory>src</sourceDirectory>
+		<sourceDirectory>src/main/java</sourceDirectory>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

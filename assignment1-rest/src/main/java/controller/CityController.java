@@ -26,7 +26,7 @@ public class CityController {
 	}
 	
 	public void fillDb() {
-		String fileName = "resources/zipcodes.txt";
+		String fileName = "src/main/resources/zipcodes.txt";
 		File file = new File(fileName);		
 		BufferedReader in = null;
 		String line;
