@@ -1,3 +1,3 @@
 spring:
   application:
-    name: my-eureka-server
+    name: assignment2-eureka-server
