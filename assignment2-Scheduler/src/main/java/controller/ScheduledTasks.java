@@ -41,7 +41,7 @@ public class ScheduledTasks {
     	RestTemplate restTemplate = new RestTemplate();
     	City[] cities = null;
     	try{
-    		cities = restTemplate.getForObject("http://localhost:8080/city", City[].class);    		
+    		cities = restTemplate.getForObject("http://localhost:8765/rest/city", City[].class);    		
     	}catch(ResourceAccessException e) {
     		log.error("Could not fetch cities from Rest-server");
     		return;
@@ -94,7 +94,7 @@ public class ScheduledTasks {
     		HttpHeaders headers = new HttpHeaders();
     		headers.setContentType(MediaType.APPLICATION_JSON);
     		HttpEntity<Report> entity = new HttpEntity<Report>(report,headers);
-    		restTemplate.exchange("http://localhost:8080/report?zip="+city.getZip(), HttpMethod.POST, entity,String.class);
+    		restTemplate.exchange("http://localhost:8765/rest/report?zip="+city.getZip(), HttpMethod.POST, entity,String.class);
     	}catch(HttpClientErrorException e) {
     		if(e.getRawStatusCode() == 405 || e.getRawStatusCode() == 404 || e.getRawStatusCode() == 400) {
     			log.error("Failed to post report for "+city);
