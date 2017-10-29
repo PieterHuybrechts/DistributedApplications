@@ -3,11 +3,11 @@ package domain;
 public class Review {
 
 	private long id;
-	private City city;
+	private String zip;
 	private String review;
 	
 	public Review() {
-		
+		id=-1;
 	}
 	
 	public void setId(long id) {
@@ -18,12 +18,12 @@ public class Review {
 		return this.id;
 	}
 	
-	public void setCity(City city) {
-		this.city = city;
+	public void setZip(String zip) {
+		this.zip = zip;
 	}
 	
-	public City getCity() {
-		return this.city;
+	public String getZip() {
+		return this.zip;
 	}
 	
 	public void setReview(String review) {

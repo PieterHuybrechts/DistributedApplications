@@ -2,6 +2,7 @@ package db;
 
 import java.util.List;
 
+import domain.City;
 import domain.Review;
 
 public interface ReviewDb {
@@ -18,12 +19,14 @@ public interface ReviewDb {
 	
 	public List<Review> getAll();
 	public Review get(long id);
+	public List<Review> getAllFromCity(String zip);
+	public List<Review> getAllFromCity(City city);
 	
 	//------
 	//Update
 	//------
 	
-	public void update(long id,Review review);
+	public void update(Review review);
 	
 	//------
 	//Delete

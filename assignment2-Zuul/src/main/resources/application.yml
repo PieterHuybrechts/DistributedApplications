@@ -1,18 +1,17 @@
 server:
   port: 8765
-  
 zuul:
-  ignoredService: "*"
+  ignoredService: '*'
   routes:
     WeatherService:
-       path: /weather/**
+      path: /weather/**
     DestinationService:
-       path: /destination/**
-
+      path: /destination/**
+    ReviewService:
+      path: /review/**
 eureka:
   instance:
     leaseRenewalIntervalInSeconds: 10
     instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${random.value}}}
   client:
-    registryFetchIntervalSeconds: 5 
-
+    registryFetchIntervalSeconds: 5
