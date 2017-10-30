@@ -67,7 +67,7 @@ public class ReviewDbMemory implements ReviewDb{
 		List<Review> reviews = new ArrayList<>();
 		
 		for(Review r : getAll()) {
-			if(r.getZip().equals(city)) {
+			if(r.getZip().equals(city.getZip())) {
 				reviews.add(r);
 			}
 		}
