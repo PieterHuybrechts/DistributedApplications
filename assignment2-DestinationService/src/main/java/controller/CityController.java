@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -54,5 +55,10 @@ public class CityController {
 	@RequestMapping(method=RequestMethod.GET)
 	public List<City> getAll(){
 		return db.getAll();
+	}
+	
+	@RequestMapping(path="/{zip}")
+	public City get(@PathVariable String zip) {
+		return db.get(zip);
 	}
 }
