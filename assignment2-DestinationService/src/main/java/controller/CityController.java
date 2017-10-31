@@ -51,7 +51,7 @@ public class CityController {
 		
 	}
 	
-	@RequestMapping(path="city",method=RequestMethod.GET)
+	@RequestMapping(method=RequestMethod.GET)
 	public List<City> getAll(){
 		return db.getAll();
 	}

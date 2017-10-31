@@ -46,17 +46,17 @@ public class ReviewController {
 		}
 	}
 	
-	@RequestMapping(path="/review",method=RequestMethod.GET)
+	@RequestMapping(method=RequestMethod.GET)
 	public List<Review> getAll() {
 		return reviewDb.getAll();
 	}
 	
-	@RequestMapping(path="/review/{zip}",method=RequestMethod.GET)
+	@RequestMapping(path="/{zip}",method=RequestMethod.GET)
 	public List<Review> get(@PathVariable String zip) {
 		return reviewDb.getAllFromCity(zip);
 	}
 	
-	@RequestMapping(path="/review",method=RequestMethod.POST)
+	@RequestMapping(method=RequestMethod.POST)
 	public void post(@RequestBody Review review){
 		saveReview(review);
 	}

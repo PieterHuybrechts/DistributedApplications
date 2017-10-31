@@ -1,9 +1,9 @@
 package controller;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import db.ReportDb;
@@ -36,13 +36,13 @@ public class ReportController {
 		}
 	}
 	
-	@RequestMapping(path="/report",method = RequestMethod.GET)
-	public Report get(@RequestParam(value="zip") String zip) {
+	@RequestMapping(path="/{zip}",method = RequestMethod.GET)
+	public Report get(@PathVariable String zip) {
 		return reportDb.get(zip); 
 	}
 	
-	@RequestMapping(path="/report",method = RequestMethod.POST)
-	public void post(@RequestParam(value="zip") String zip,@RequestBody Report report) {
+	@RequestMapping(path="/{zip}",method = RequestMethod.POST)
+	public void post(@PathVariable String zip,@RequestBody Report report) {
 		saveReport(zip, report);
 	}
 	
