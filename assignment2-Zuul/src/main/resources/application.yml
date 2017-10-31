@@ -9,6 +9,9 @@ zuul:
       path: /destination/**
     ReviewService:
       path: /review/**
+    CompositeService:
+      path: /composite/**
+    
 eureka:
   instance:
     leaseRenewalIntervalInSeconds: 10
