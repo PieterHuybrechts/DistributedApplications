@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @EnableDiscoveryClient
 @SpringBootApplication
-@ComponentScan(basePackages = {"controller"})
+@ComponentScan(basePackages = {"controller","config"})
 public class App {
 
     public static void main(String[] args) {

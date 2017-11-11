@@ -9,7 +9,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@ComponentScan(basePackages = {"controller"})
+@ComponentScan(basePackages = {"controller","config"})
 @EnableScheduling
 public class Application {
 

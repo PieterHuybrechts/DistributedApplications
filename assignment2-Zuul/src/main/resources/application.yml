@@ -3,12 +3,6 @@ server:
 zuul:
   ignoredService: '*'
   routes:
-    WeatherService:
-      path: /weather/**
-    DestinationService:
-      path: /destination/**
-    ReviewService:
-      path: /review/**
     CompositeService:
       path: /composite/**
     

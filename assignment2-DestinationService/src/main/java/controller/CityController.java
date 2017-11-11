@@ -52,12 +52,12 @@ public class CityController {
 		
 	}
 	
-	@RequestMapping(method=RequestMethod.GET)
+	@RequestMapping(path="/city", method=RequestMethod.GET)
 	public List<City> getAll(){
 		return db.getAll();
 	}
 	
-	@RequestMapping(path="/{zip}")
+	@RequestMapping(path="/city/{zip}")
 	public City get(@PathVariable String zip) {
 		return db.get(zip);
 	}

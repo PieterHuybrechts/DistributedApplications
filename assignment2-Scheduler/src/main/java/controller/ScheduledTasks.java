@@ -6,6 +6,7 @@ import java.net.UnknownHostException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -26,7 +27,11 @@ public class ScheduledTasks {
 
     private static int counter;
     
-    public ScheduledTasks() {
+    //@Autowired 
+    private RestTemplate restTemplate;
+    
+    public ScheduledTasks(@Autowired RestTemplate restTemplate) {
+    	this.restTemplate = restTemplate;
     	counter = 0;
 	}
     
@@ -38,10 +43,10 @@ public class ScheduledTasks {
     	//Get all cities
     	//--------------
     	
-    	RestTemplate restTemplate = new RestTemplate();
+    	//RestTemplate restTemplate = new RestTemplate();
     	City[] cities = null;
     	try{
-    		cities = restTemplate.getForObject("http://localhost:8765/destination", City[].class);    		
+    		cities = restTemplate.getForObject("http://DESTINATIONSERVICE/city", City[].class);    		
     	}catch(ResourceAccessException e) {
     		log.error("Could not fetch cities from Rest-server");
     		return;
@@ -58,11 +63,11 @@ public class ScheduledTasks {
     	//Get report for city
     	//-------------------
     	
-    	restTemplate = new RestTemplate();
+    	RestTemplate restTemplate2 = new RestTemplate();
     	Report report = null;
     	
     	try {
-    		report = restTemplate.getForObject("http://api.openweathermap.org/data/2.5/weather?zip="+city.getZip()+",be&appid=25bfba28ef618cf9bf295d556a389e69", Report.class);
+    		report = restTemplate2.getForObject("http://api.openweathermap.org/data/2.5/weather?zip="+city.getZip()+",be&appid=25bfba28ef618cf9bf295d556a389e69", Report.class);
     	}catch (HttpClientErrorException e) {
 			if(e.getRawStatusCode()==404) {
 				log.error("Failed to get report for "+city);
@@ -94,7 +99,7 @@ public class ScheduledTasks {
     		HttpHeaders headers = new HttpHeaders();
     		headers.setContentType(MediaType.APPLICATION_JSON);
     		HttpEntity<Report> entity = new HttpEntity<Report>(report,headers);
-    		restTemplate.exchange("http://localhost:8765/weather/"+city.getZip(), HttpMethod.POST, entity,String.class);
+    		restTemplate.exchange("http://WEATHERSERVICE/report/"+city.getZip(), HttpMethod.POST, entity,String.class);
     	}catch(HttpClientErrorException e) {
     		if(e.getRawStatusCode() == 405 || e.getRawStatusCode() == 404 || e.getRawStatusCode() == 400) {
     			log.error("Failed to post report for "+city);

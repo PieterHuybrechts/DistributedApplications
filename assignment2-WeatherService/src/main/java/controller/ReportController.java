@@ -36,12 +36,12 @@ public class ReportController {
 		}
 	}
 	
-	@RequestMapping(path="/{zip}",method = RequestMethod.GET)
+	@RequestMapping(path="/report/{zip}",method = RequestMethod.GET)
 	public Report get(@PathVariable String zip) {
 		return reportDb.get(zip); 
 	}
 	
-	@RequestMapping(path="/{zip}",method = RequestMethod.POST)
+	@RequestMapping(path="/report/{zip}",method = RequestMethod.POST)
 	public void post(@PathVariable String zip,@RequestBody Report report) {
 		saveReport(zip, report);
 	}
