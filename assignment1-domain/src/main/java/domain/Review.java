@@ -34,4 +34,9 @@ public class Review {
 		return this.review;
 	}
 	
+	@Override
+	public String toString() {
+		return this.getReview();
+	}
+	
 }
