@@ -28,12 +28,11 @@ public class SelectionPanel extends JPanel {
 		comboBox = new JComboBox();
 		comboBox.setBounds(87, 8, 135, 20);
 		add(comboBox);
+		comboBox.addActionListener(new ComboBoxListener());
 		
 		JButton btnSelect = new JButton("Select");
 		btnSelect.setBounds(232, 7, 89, 23);
 		add(btnSelect);
-		btnSelect.addActionListener(new SelectButtonListener());
-
 	}
 	
 	public void setCities(City[] cities) {
@@ -48,7 +47,7 @@ public class SelectionPanel extends JPanel {
 		this.viewController = viewController;
 	}
 	
-	private class SelectButtonListener implements ActionListener{
+	private class ComboBoxListener implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {

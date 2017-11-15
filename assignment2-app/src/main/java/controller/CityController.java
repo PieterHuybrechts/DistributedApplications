@@ -9,28 +9,26 @@ import domain.Composite;
 public class CityController {
 	
 	public City[] getAllCities() {
-		
 		RestTemplate restTemplate = new RestTemplate();
 		
-		City[] cities = null;
     	try{
-    		cities = restTemplate.getForObject("http://localhost:8765/composite/city", City[].class);    		
+    		return restTemplate.getForObject("http://localhost:8765/composite/city", City[].class);    		
     	}catch(ResourceAccessException e) {
-    		
+    		return null;
     	}
-    	
-    	return cities;
 	}
 	
 	public Composite getCityDetails(String zip) {
 		RestTemplate restTemplate = new RestTemplate();
-		return restTemplate.getForObject("http://localhost:8765/composite/city/"+zip, Composite.class);
+		
+		try {
+			return restTemplate.getForObject("http://localhost:8765/composite/city/"+zip, Composite.class);			
+		}catch(Exception e) {
+			return null;
+		}
 	}
 	
 	public Composite getCityDetails(City city) {
 		return getCityDetails(city.getZip());
 	}
-	
-	
-	
 }

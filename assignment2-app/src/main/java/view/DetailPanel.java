@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
@@ -76,68 +77,59 @@ public class DetailPanel extends JPanel {
 		nextButton.setBounds(171, 82, 41, 23);
 		add(nextButton);
 		nextButton.addActionListener(new NextButtonListener());
-		
-		
-		/*JList list = new JList();
-		//list.setBounds(10, 86, 430, 203);
-		//add(list);
-		
-		listScroller = new JScrollPane();
-		listScroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		listScroller.setBounds(10, 290, 430, -197);
-		//listScroller.setViewportView(list);
-		add(listScroller);*/
 
 	}
 	
 	public void updateDetails(Composite c) {
-		int t = (int) (c.getReport().getMain().getTemp() - 273.15) * 10;
-		double temp = t / 10;
-		temperature.setText(temp+"°C");
-		description.setText(c.getReport().getWeather().get(0).getDescription());
+		if(c==null) {
+			JOptionPane.showMessageDialog(null, "Data could not be fetched");
+			return;
+		}
 		
-		reviews = c.getReviews();
-		if(reviews.size()==0) {
-			reviewProgres.setText("0/0");
-			reviewTextArea.setText("");
-		}else {			
-			reviewProgres.setText("1/"+reviews.size());
-			reviewTextArea.setText(c.getReviews().get(0).getReview());
+		if(c.getReport()!=null) {
+			int t = (int) (c.getReport().getMain().getTemp() - 273.15) * 10;
+			double temp = t / 10;
+			temperature.setText(temp+"°C");
+			description.setText(c.getReport().getWeather().get(0).getDescription());			
+		}else {
+			temperature.setText("Error");
+			description.setText("Error");			
 		}
 		
 		
-		/*JList list = new JList();
-		list.setListData(c.getReviews().toArray());
-		listScroller.setViewportView(list);*/	
+		reviews = c.getReviews();
+		
+		if(reviews!=null && reviews.size()>0) {
+				reviewProgres.setText("1/"+reviews.size());
+				reviewTextArea.setText(reviews.get(0).getReview());
+		}else{
+			reviewProgres.setText("0/0");
+			reviewTextArea.setText("");			
+		}
 	}
 	
 	private class NextButtonListener implements ActionListener{
-
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if(reviewCounter+1<reviews.size()) {
+			if(reviews!=null && reviewCounter+1<reviews.size()) {
 				reviewCounter++;
 				int temp = reviewCounter+1;
 				reviewProgres.setText(temp+"/"+reviews.size());
 				reviewTextArea.setText(reviews.get(reviewCounter).getReview());
 			}
-			
 		}
-		
 	}
 	
 	private class BackButtonListener implements ActionListener{
-
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if(reviewCounter>0) {
+			if(reviews!=null && reviewCounter>0) {
 				reviewCounter--;			
 				int temp = reviewCounter+1;
 				reviewProgres.setText(temp+"/"+reviews.size());
 				reviewTextArea.setText(reviews.get(reviewCounter).getReview());
 			}
-			
 		}
-		
 	}
+	
 }
