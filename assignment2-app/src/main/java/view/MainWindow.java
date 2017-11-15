@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controller.CityController;
 import controller.ViewController;
 import domain.City;
 import domain.Composite;
@@ -21,11 +22,12 @@ public class MainWindow extends JFrame {
 	
 	private SelectionPanel selectionPanel;
 	private DetailPanel detailPanel;
+	private ReviewPanel reviewPanel; 
 	private ViewController viewController;
 	
 	public MainWindow() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 467, 376);
+		setBounds(100, 100, 467, 540);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -33,7 +35,7 @@ public class MainWindow extends JFrame {
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] {450, 0};
-		gridBagLayout.rowHeights = new int[] {40, 300, 0};
+		gridBagLayout.rowHeights = new int[] {40, 300, 200, 30};
 		gridBagLayout.columnWeights = new double[]{0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gridBagLayout);
@@ -54,6 +56,14 @@ public class MainWindow extends JFrame {
 		
 		/*mainPanel = new MainPanel();
 		contentPane.add(mainPanel);*/
+		
+		reviewPanel = new ReviewPanel();
+		GridBagConstraints gbc_reviewPanel = new GridBagConstraints();
+		gbc_reviewPanel.gridheight = 2;
+		gbc_reviewPanel.fill = GridBagConstraints.BOTH;
+		gbc_reviewPanel.gridx = 0;
+		gbc_reviewPanel.gridy = 2;
+		contentPane.add(reviewPanel, gbc_reviewPanel);
 	}
 	
 	public void setCities(City[] cities) {
@@ -63,10 +73,17 @@ public class MainWindow extends JFrame {
 	public void setViewController(ViewController viewController) {
 		this.viewController = viewController;
 		selectionPanel.setViewController(viewController);
+		reviewPanel.setViewController(viewController);
 	}
 	
 	public void updateDetailPanel(Composite c) {
 		detailPanel.updateDetails(c);
+		reviewPanel.setCity(c.getCity());
+	}
+
+	public void setCityController(CityController cityController) {
+		reviewPanel.setCityController(cityController);
+		
 	}
 
 }

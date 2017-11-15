@@ -16,6 +16,7 @@ public class ViewController {
 		
 		setCitySelectionPanel();
 		mainWindow.setViewController(this);
+		mainWindow.setCityController(cityController);
 	}
 	
 	public void setCitySelectionPanel() {
